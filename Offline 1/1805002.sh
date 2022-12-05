@@ -49,7 +49,7 @@ for file in Submissions/*; do
         
 
         if [[ (( !(-e $file/$last_7digits.sh) )) ]]; then
-            echo "doesnt exist"
+            #echo "doesnt exist"
             score=0
             echo "$std_count,$score">>output.csv
             std_count=$(( $std_count + 1 ))
@@ -63,7 +63,7 @@ for file in Submissions/*; do
             score=0
         fi
         for file2 in Submissions/*; do
-            diff -w $file2/*.sh $file/${file: -7}.sh>diff2.txt
+            diff -Zb $file2/*.sh $file/${file: -7}.sh>diff2.txt
             copyMatch=$(copyChecker diff2.txt)
             if [[ $file == $file2 ]]; then
                 copyMatch=1
@@ -74,11 +74,22 @@ for file in Submissions/*; do
                 break
             fi
         done
-        echo "${file: -7},$score">>output.csv
+        #echo "${file: -7},$score">>output.csv
 
     fi
     std_count=$(( std_count + 1 ))
 done
+
+echo $std_count
+last_digit=${std_count: -1}
+while [[ (( $last_digit -le $max_std_id )) ]];do
+    score=0
+    echo "$std_count,$score">>output.csv
+    last_digit=$(( $last_digit + 1 ))
+    std_count=$(( $std_count + 1 ))
+done
+
+
 rm diff.txt
 rm diff2.txt
 rm output.txt
