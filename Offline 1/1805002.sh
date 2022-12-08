@@ -74,7 +74,7 @@ for file in Submissions/*; do
                 break
             fi
         done
-        #echo "${file: -7},$score">>output.csv
+        echo "${file: -7},$score">>output.csv
 
     fi
     std_count=$(( std_count + 1 ))
