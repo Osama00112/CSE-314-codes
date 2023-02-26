@@ -1,9 +1,11 @@
 #read line
 #read pattern
-for arg in *.txt; do
-    head -n$1 $arg|tail -n1|grep $2
+for file in *.txt; do
+    #cat  $arg|head -n$1|tail -n1|grep $2
     #echo $?
-    if false;then 
+    pattern=$(cat $file | head -n$1 | tail -n1 | grep $2)
+    #echo $pattern
+    if [[ "$pattern" = "hello" ]];then 
         echo "pawa gese"
     else
         echo "nai"

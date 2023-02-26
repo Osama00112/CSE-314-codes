@@ -15,6 +15,7 @@ for file in $*; do
             echo "$file is currently executable."
             ls -l $file
             echo "changing permission"
+            chmod a-x $file
             ls -l $file
             echo "currently not executable"
         else 
